@@ -31,8 +31,33 @@ class App extends React.Component {
       .catch(err => console.log(err));
   }
 
-  saveMovie() {
+  saveMovie(movie_id) {
+    const {
+      id,
+      title,
+      overview,
+      vote_average,
+      poster_path,
+    } = this.state.movies.filter(movie => {
+      return movie.id === movie_id;
+    })[0];
+
     // same as above but do something diff
+    axios
+      .post('http://localhost:3000/save', {
+        id,
+        title,
+        overview,
+        voteAverage: vote_average,
+        posterPath: poster_path,
+      })
+      .then(({ data }) => {
+        this.setState({
+          favorites: (this.state.favorites.push(data.result),
+          this.state.favorites),
+        });
+      })
+      .catch(err => console.log(err));
   }
 
   deleteMovie() {
@@ -68,6 +93,7 @@ class App extends React.Component {
               this.state.showFaves ? this.state.favorites : this.state.movies
             }
             showFaves={this.state.showFaves}
+            saveMovie={this.saveMovie}
           />
         </div>
       </div>
