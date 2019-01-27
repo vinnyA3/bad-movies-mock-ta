@@ -69,7 +69,10 @@ app.post('/save', function(req, res) {
           voteAverage: body.vote_avg,
           posterPath: body.posterPath,
         })
-          .then(movie => res.send({ result: movie }))
+          .then(movie => {
+            console.log(movie);
+            res.send({ result: movie });
+          })
           .catch(err =>
             res
               .status(500)
