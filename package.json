@@ -4,7 +4,7 @@
   "description": "bad movies practice for junior developers",
   "main": "index.js",
   "scripts": {
-    "react-dev": "webpack -d --watch",
+    "react-dev": "webpack-dev-server",
     "server-dev": "nodemon server/index.js"
   },
   "author": "Peter Park",
@@ -17,7 +17,8 @@
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
     "webpack": "^4.17.1",
-    "webpack-cli": "^3.1.0"
+    "webpack-cli": "^3.1.0",
+    "webpack-dev-server": "^3.1.14"
   },
   "dependencies": {
     "axios": "^0.18.0",
