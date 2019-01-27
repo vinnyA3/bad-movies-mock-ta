@@ -7,9 +7,6 @@ import axios from 'axios';
 import Search from './components/Search.jsx';
 import Movies from './components/Movies.jsx';
 
-const API_KEY = '280f3eec57d5e5670688134510ec83c7';
-const API_URL = `https://api.themoviedb.org/3/discover/movie?sort_by=popularity.aesc`;
-
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -20,16 +17,18 @@ class App extends React.Component {
     };
 
     // you might have to do something important here!
+    this.getMovies = this.getMovies.bind(this);
+    this.swapFavorites = this.swapFavorites.bind(this);
+    this.saveMovie = this.saveMovie.bind(this);
   }
 
-  getMovies() {
-    // make an axios request to your server on the GET SEARCH endpoint
-    // find movies by bad rating
-    axios.get(`${API_URL}&api_key=${API_KEY}`).then(({ data }) => {
-      // set the state (movies) to the response
-      console.log(data.results);
-      this.setState({ movies: data.results });
-    });
+  getMovies(genre_id) {
+    axios
+      .get('http://localhost:3000/search', { params: { genre_id } })
+      .then(({ data }) => {
+        this.setState({ movies: data.results, favorites: data.favorites });
+      })
+      .catch(err => console.log(err));
   }
 
   saveMovie() {
@@ -62,6 +61,7 @@ class App extends React.Component {
           <Search
             swapFavorites={this.swapFavorites}
             showFaves={this.state.showFaves}
+            getMovies={this.getMovies}
           />
           <Movies
             movies={
