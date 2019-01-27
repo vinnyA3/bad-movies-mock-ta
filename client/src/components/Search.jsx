@@ -2,9 +2,9 @@ import React from 'react';
 
 class Search extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
-      genres: []
+      genres: [],
     };
   }
   getGenres() {
@@ -14,8 +14,15 @@ class Search extends React.Component {
   render() {
     return (
       <div className="search">
-        <button onClick={() => {this.props.swapFavorites()}}>{this.props.showFaves ? "Show Results" : "Show Favorites"}</button>
-        <br/><br/>
+        <button
+          onClick={() => {
+            this.props.swapFavorites();
+          }}
+        >
+          {this.props.showFaves ? 'Show Results' : 'Show Favorites'}
+        </button>
+        <br />
+        <br />
 
         {/* Make the select options dynamic from genres !!! */}
         {/* How can you tell which option has been selected from here? */}
@@ -25,10 +32,10 @@ class Search extends React.Component {
           <option value="thisway">This Way</option>
           <option value="thatway">That Way</option>
         </select>
-        <br/><br/>
+        <br />
+        <br />
 
         <button>Search</button>
-
       </div>
     );
   }
